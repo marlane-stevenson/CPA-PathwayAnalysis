@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+awareness_analysis_report.md
+awareness_impact_chart.png

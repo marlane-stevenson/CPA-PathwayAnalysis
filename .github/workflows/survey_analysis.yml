@@ -1,0 +1,35 @@
+name: Analyze Survey Data
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  analyze-survey:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Run analysis script
+      run: python analyze_survey.py
+
+    - name: Upload Analysis Report and Chart
+      uses: actions/upload-artifact@v4
+      with:
+        name: analysis-results
+        path: |
+          awareness_analysis_report.md
+          awareness_impact_chart.png
